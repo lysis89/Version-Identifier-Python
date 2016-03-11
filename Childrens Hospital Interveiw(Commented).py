@@ -26,12 +26,20 @@ def main(filename):
 	values = []
 	digitValues = []
 
-	
+	## loop for walking through the lists
 	for x in range(0, lineCount):
+		## Read each line of the file and place each line in a list.
 		line = f.readline()
 		values.append(line)
+		## Make a copy of the list to be modified for the number conversion.
 		digitValues.append(values[x])
+		## Check if each charater is a digit, if it isn't it will remove it. 
+		## After it performs the check it will replace the orgianl value in the position with the newly formatted version.
+		## Example; for 3.0.1 it removes the not numeric charater . and stores the value as 301
+		## Next it will append a . at the front of the value. The new value will be .301
 		digitValues[x] = ''.join(i for i in digitValues[x] if i.isdigit())
 		digitValues[x] = ''.join(('.', digitValues[x]))
+	## After converting all of the values to values which can be compared it will then find the highest value and return the position in the array.	
 	positionHighestValue = digitValues.index(max(digitValues))
+	## After finding the position of the highest value that position is applied to the orignal list and returns that value and removes the '\n' attached.
 	return values[positionHighestValue].replace('\n', '')
